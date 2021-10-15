@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "info": {
+      "type": "sucursales",
+      "blocks": {
+        "3ecd7f0b-2004-4255-b3c1-fe4cf2e2eaff": {
+          "type": "location",
+          "settings": {
+            "loc-name": "Merida Norte",
+            "loc-dir": "Calle 54 No. 210 x 33 Esquina Col. Benito Juárez Norte (atrás de The Home Depot y a un Costado de la Escuela de PostGrado)",
+            "loc-hora": "Horario: Lunes a Viernes de 9am a 8 pm \/ Sabados de 10am a 8pm",
+            "loc-tel": "9999484019",
+            "loc-mail": "atencion@delgadoycia.mx",
+            "loc-img1": "shopify:\/\/shop_images\/meridanorte3.jpg",
+            "loc-img2": "shopify:\/\/shop_images\/meridanorte6.jpg",
+            "loc-img3": "shopify:\/\/shop_images\/meridanorte8.jpg",
+            "loc-img4": "shopify:\/\/shop_images\/meridanorte5.jpg",
+            "loc-img5": "shopify:\/\/shop_images\/meridanorte7.jpg",
+            "loc-img6": "shopify:\/\/shop_images\/meridanorte4.jpg",
+            "loc-img7": "shopify:\/\/shop_images\/meridanorte2.jpg",
+            "loc-img8": "shopify:\/\/shop_images\/meridanorte.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "3ecd7f0b-2004-4255-b3c1-fe4cf2e2eaff"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "info"
+  ]
+}

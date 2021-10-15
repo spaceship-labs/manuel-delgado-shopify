@@ -1,0 +1,374 @@
+
+
+<script >
+
+
+
+  window.addEventListener('load', () => {
+    var mainColl = new Swiper('.locationSlider',{
+      slidesPerView:1,
+       loop: false,
+       centeredSlides: false,
+       spaceBetween: 30,
+       navigation: {
+        nextEl: ".next",
+        prevEl: ".prev",
+      },
+    });
+  });
+</script>
+
+
+<style type="text/css">
+    .suc{
+        padding: 0 0 0 40px;
+    }
+    
+    .suc h2{
+        font-size: 31px;
+        line-height: 34px;
+        font-weight: bold;
+        margin-bottom: 46px;
+        margin-top: 53px;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        color: #757575;
+    }
+    
+    .suc .col2{
+       width: 673px;
+       height: 100vh;
+       max-height: 924px;
+       min-height: 500px;
+       position: sticky;
+       top: 0px;
+    }
+    .suc .col2 iframe{
+         width: 100%;
+         height: 100%;
+    }
+    
+    
+  .suc .col1{
+     position: relative;
+     width: calc(100% - 673px);
+     padding-right: 50px;
+     padding-bottom: 50px;
+  }
+  .suc .col1 .sucursal{
+    margin-bottom: 49px;
+  }
+  .suc .sucursal .slider{
+        width: 269px;
+        min-height: 220px;
+        position: relative;
+        border-radius: 23px;
+        overflow: hidden;
+    }
+  .suc .sucursal .slider .swiper-slide{
+        position: relative;
+        min-height: 220px;
+    }
+  .suc .sucursal .slider img{
+       object-fit: cover;
+       position: absolute;
+       width: 100%;
+       height: 100%;
+    }
+   .suc .sucursal .slider .next,
+   .suc .sucursal .slider .prev{
+       position: absolute;
+       top: 0;
+       bottom: 0;
+       margin: auto;
+       z-index: 2;
+       border-radius: 50%;
+       background-color: white;
+       width: 28px;
+       height: 28px;
+       cursor: pointer;
+    }
+   .suc .sucursal .slider .next img,
+   .suc .sucursal .slider .prev img{
+       width: 60%;
+       height: 60%;
+       position: absolute;
+       left: 0;
+       top: 0;
+       right: 0;
+       bottom: 0;
+       margin: auto;
+    }
+    .suc .sucursal .slider .next{
+       right: 7px;
+    }
+    .suc .sucursal .slider .prev{
+       left: 7px;
+    }
+    .suc .sucursal .infoHolder{
+        width: calc(100% - 269px);
+        max-width: 417px;
+        padding-left: 28px;
+    }
+    .suc .sucursal .infoHolder h3{
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        margin-top: 0px;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        color: #757575;
+    }
+    .suc .sucursal .infoHolder div{
+        position: relative;
+        border-bottom: 2px solid #e4e4e4;
+        min-height: 49px;
+    }
+    .suc .sucursal .infoHolder div img{
+        width: 23px;
+        height: 23px;
+        position: absolute;
+        left: 2px;
+        top: 5px;
+        margin: auto;
+    }
+    .suc .sucursal .infoHolder div p{
+      font-size: 13px;
+      line-height: 18px;
+      padding-left: 48px;
+      padding-right: 20px;
+      color: #757575;
+    }
+
+
+
+
+    @media only screen and (max-width: 1338px){
+        .suc .col1{
+            width: 60%;
+        }
+       .suc .col2{
+         width: 40%;
+       }
+    }
+    @media only screen and (max-width: 940px){
+      .suc .col1,
+      .suc .col2{
+        width: 100%;
+      }
+      .suc .col1{
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+      .suc .col2{
+        position: relative;
+        height: 500px;
+      }
+      .suc{
+          padding: 0 0 0 0px;
+      }
+    }
+    @media only screen and (max-width: 650px){
+      .suc .col1 .sucursal .slider{
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      .suc .col1 .sucursal .infoHolder{
+        width: 100%;
+        max-width: 100%;
+        padding-right: 40px;
+      }
+    }
+</style>
+
+
+<div class="suc page-width layout-row">
+    <div class="col col1">
+     <h2>Nuestras sucursales</h2>  
+     
+     {%- for block in section.blocks -%}
+     <!-- sucursal -->
+     <div class="sucursal layout-row" >
+         <div class="slider locationSlider">
+            <div class="swiper-wrapper">
+             {%- if block.settings.loc-img1 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img1 | img_url: "master" }}" alt="locación-{{block.settings.loc-name}}-1" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img2 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img2 | img_url: "master" }}" alt="locación-{{block.settings.loc-name}}-2" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img3 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img3 | img_url: "master" }}" alt="locación-{{block.settings.loc-name}}-3" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img4 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img4 | img_url: "master" }}" alt="locación-{{block.settings.loc-name}}-4" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img5 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img5 | img_url: "master" }}" alt="locación-{{block.settings.loc-name}}-5" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img6 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img6 | img_url: "master" }}" alt="locación-{{block.settings.loc-name}}-6" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img7 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img7 | img_url: "full" }}" alt="locación-{{block.settings.loc-name}}-7" >
+               </div>
+             {%- endif -%}
+             {%- if block.settings.loc-img8 -%}
+               <div class="swiper-slide">
+                  <img src="{{ block.settings.loc-img8 | img_url: "full" }}" alt="locación-{{block.settings.loc-name}}-8" >
+               </div>
+             {%- endif -%}
+            </div> 
+             <div class="prev">
+                <img src="{{ 'arrow-left.svg' | asset_url }}" alt="prev" >
+             </div>
+             <div class="next">
+                <img src="{{ 'arrow-right.svg' | asset_url }}" alt="next" >
+             </div>
+            
+         </div>
+         <div class="infoHolder" >
+             <h3>{{block.settings.loc-name}}</h3>
+
+         <div>
+            <img src="{{ 'pinmap.svg' | asset_url}} " alt="pinmap" >
+            <p>{{block.settings.loc-dir}}</p>
+         </div>
+         <div>
+            <img src="{{ 'horario.svg' | asset_url}} " alt="horario" >
+            <p>Horario: {{block.settings.loc-hora}}</p>
+         </div>
+         <div>
+            <img src="{{ 'telefono.svg' | asset_url}} " alt="telefono" >
+            <p>Tel(s). {{block.settings.loc-tel}} <br> {{block.settings.loc-mail}}</p>
+         </div>
+
+         </div>
+     </div>
+
+     {%- endfor -%}
+
+
+
+
+    </div>
+    <div class="col col2">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d20154.740016717802!2d-86.84050594881973!3d21.16708925039532!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf5e15ed82a0317a3!2sManuel%20Delgado!5e0!3m2!1ses-419!2smx!4v1630373939182!5m2!1ses-419!2smx"  style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "sucursales",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "location",
+      "name": "Lugar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "loc-name",
+          "placeholder": "Nombre",
+          "default": "nombre",
+          "info": "nombre del lugar",
+          "label": "name"
+        },
+        {
+          "type": "text",
+          "id": "loc-dir",
+          "placeholder": "Dirección",
+          "default": "Dirección",
+          "info": "Dirección del lugar",
+          "label": "dirección"
+        },
+        {
+          "type": "text",
+          "id": "loc-hora",
+          "placeholder": "Horarios",
+          "default": "horario",
+          "info": "horario de apertura",
+          "label": "horarios"
+        },
+        {
+          "type": "text",
+          "id": "loc-tel",
+          "placeholder": "Teléfono",
+          "default": "telefono",
+          "info": "teléfono ",
+          "label": "teléfono"
+        },
+        {
+          "type": "text",
+          "id": "loc-mail",
+          "placeholder": "Mail",
+          "default": "mail",
+          "info": "Email ",
+          "label": "Email"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img2",
+          "label": "Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img3",
+          "label": "Image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img4",
+          "label": "Image 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img5",
+          "label": "Image 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img6",
+          "label": "Image 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img7",
+          "label": "Image 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc-img8",
+          "label": "Image 8"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "sucursales"
+    }
+  ]
+}
+{% endschema %}

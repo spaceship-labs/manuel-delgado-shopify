@@ -1,0 +1,165 @@
+<script>
+  window.addEventListener('load', () => {
+    var mainColl = new Swiper('.mainCollSlider',{
+      slidesPerView:1.5,
+      freeMode: true,
+      loop: true,
+      centeredSlides: false,
+      spaceBetween: 30,
+      breakpoints: {
+       640: {
+         slidesPerView: 3.5,
+       },
+       768: {
+         slidesPerView: 4.5,
+       },
+       1344: {
+         slidesPerView: 7,
+       },
+      },
+    });
+  });
+</script>
+
+<style>
+  .collsSlider .swiper-slide{
+    position: relative;
+    height: auto;
+  }
+  .collsSlider .swiper-slide img{
+    max-height: 90%;
+    height: 90%;
+    width: 90%;
+    object-fit: contain;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .collsSlider .swiper-slide a{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+  }
+  .collsSlider .swiper-slide a p{
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .collsSlider .swiper-slide .colorHolder{
+    display: block;
+    position: relative;
+    height: 116px;
+    border-radius: 20px;
+    background-color: #a198ca;
+    width: 100%;
+  }
+  .collsSlider .swiper-slide.cardColor1 .colorHolder{
+    background-color: #ca98c4;
+  }
+  .collsSlider .swiper-slide.cardColor2 .colorHolder{
+    background-color: #e96473;
+  }
+  .collsSlider .swiper-slide.cardColor3 .colorHolder{
+    background-color: #f99755;
+  }
+  .collsSlider .swiper-slide.cardColor4 .colorHolder{
+    background-color: #f9c555;
+  }
+  .collsSlider .swiper-slide.cardColor5 .colorHolder{
+    background-color: #78ba54;
+  }
+  .collsSlider .swiper-slide.cardColor6 .colorHolder{
+    background-color: #00D9D1;
+  }
+
+
+
+</style>
+
+
+
+<div class="collsSlider page-width layout-row orderC">
+  <h3 class='strike-header'><span>{{ section.settings.title | escape }}</span></h3>
+  
+  <section class="swiper-container swiper-slider mainCollSlider">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+
+        {%- assign i = forloop.index0 -%}
+
+         <div class="swiper-slide layout-row orderC  cardColor{{ i }}">
+            <div class="colorHolder layout-col orderC">
+            {%- if block.settings.collection.featured_image -%}
+               {%- assign collection_image = block.settings.collection.featured_image -%}
+             {%- elsif block.settings.collection.products.first and block.settings.collection.products.first.images != empty -%}
+               {%- assign collection_image = block.settings.collection.products.first.featured_image -%}
+             {%- else -%}
+               {%- assign collection_image = blank -%}
+             {%- endif -%}
+
+            <img src="{{ collection_image | img_url: '480x' }}" alt="{{ collection.title }}">
+            </div>
+
+            <a href="{{ block.settings.collection.url }}" class="layout-col orderC"><p>{{block.settings.collection.title}}</p></a>
+         </div>
+      {%- endfor -%}
+    </div>
+
+  </section>
+</div>
+
+
+
+
+{% schema %}
+{
+   "name":"t:sections.collection-list.name",
+   "tag":"section",
+   "class":"spaced-section collection-list-section",
+   "max_blocks":7,
+   "settings":[
+      {
+         "type":"text",
+         "id":"title",
+         "default":"Productos",
+         "label":"t:sections.collection-list.settings.title.label"
+      }
+   ],
+   "blocks":[
+      {
+         "type":"featured_collection",
+         "name":"t:sections.collection-list.blocks.featured_collection.name",
+         "settings":[
+            {
+               "type":"collection",
+               "id":"collection",
+               "label":"t:sections.collection-list.blocks.featured_collection.settings.collection.label"
+            }
+         ]
+      }
+   ],
+   "presets":[
+      {
+         "name":"t:sections.collection-list.presets.name",
+         "blocks":[
+            {
+               "type":"featured_collection"
+            },
+            {
+               "type":"featured_collection"
+            },
+            {
+               "type":"featured_collection"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}

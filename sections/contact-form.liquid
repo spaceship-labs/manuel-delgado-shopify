@@ -1,0 +1,207 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+<style type="text/css">
+  .contact{
+    max-width: 1084px!important;
+  }
+  .contact h3{
+    color: white;
+    font-size: 15.3px;
+    line-height: 18.5px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  .contact h4{
+    font-size: 15.3px;
+    line-height: 18.5px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    letter-spacing: 1.6px;
+  }
+  .contact .col2{
+     width: calc(50% - 50px);
+       margin-left: 50px;
+  }
+  .contact .col2 p{
+    font-size: 13px;
+  }
+  .contact .col2 h4, 
+  .contact .col2 p{
+      color: #757575;
+  }
+  .contact .col2 input,
+  .contact .col2 textarea{
+    width: 100%;
+    color: #a2a2a2;
+    border: none;
+    box-shadow: unset;
+    border-bottom: 3px solid #d8d8d8;
+    font-size: 11px;
+  }
+  .contact .col2 .field{
+    position: relative;
+  }
+  .contact .col2 .field__label.extra {
+    left: 4.5rem;
+  }
+  .contact .col2 input{
+    padding-left: 40px;
+  }
+  .contact .col2 img{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 2px;
+    top: 0;
+    bottom: 5px;
+    margin: auto;
+  }
+  .contact .col2 
+  .contact .col2 .button{
+    margin-top: 10px;
+  }
+    
+  .contact .col1{
+       position: relative;
+       width: calc(50% - 50px);
+       margin-right: 50px;
+  }
+  .contact .col1 > img{
+     object-fit: cover;
+     position: absolute;
+     width: 100%;
+     height: 100%;
+  }
+  .contact .col1 div{
+    min-height: 329px;
+    z-index: 1;
+    position: relative;
+    padding: 20px;
+  }
+  .contact .col1 div img{
+    width: 15px;
+        height: auto;
+        margin-top: 42px;
+  }
+  .contact .col1 div .button{
+        background-color: white;
+        margin-top: 43px;
+  }
+
+
+  @media only screen and (max-width: 680px){
+      .contact .col1,
+      .contact .col2{
+        width: calc(100%);
+        margin:  0 15px 20px;
+      }
+  }
+
+</style>
+
+
+
+
+<div class="contact page-width spaced-section layout-row">
+
+  <div class="col col1">
+      <img src="{{ 'contacto.jpg' | asset_url}}" alt="contacto" >
+      <div class="layout-col">
+        <img src="{{ 'pinmap.png' | asset_url}}" alt="pinmap" >
+        <h3>Te esperamos</h3>
+        <a class="button" href="/pages/sucursales">VER SUCURSALES</a>
+      </div>
+  </div>
+
+  <div class="col col2">
+    <h4>CONTÁCTANOS</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+    {%- form 'contact', id: 'ContactForm' -%}
+    {%- if form.posted_successfully? -%}
+      <div class="form-status form-status-list form__message" tabindex="-1" autofocus>{% render 'icon-success' %} {{ 'templates.contact.form.post_success' | t }}</div>
+    {%- elsif form.errors -%}
+      <div class="form__message">
+        <h2 class="form-status caption-large" role="alert" tabindex="-1" autofocus>{% render 'icon-error' %} {{ 'templates.contact.form.error_heading' | t }}</h2>
+      </div>
+      <ul class="form-status-list caption-large" role="list">
+        <li>
+          <a href="#ContactForm-email" class="link">
+            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+          </a>
+        </li>
+      </ul>
+    {%- endif -%}
+    <div class="field field--with-error">
+      <img src="{{ 'mail.svg' | asset_url }}" alt="mail" >
+      <input
+        autocomplete="email"
+        type="email"
+        id="ContactForm-email"
+        class="field__input"
+        name="contact[email]"
+        spellcheck="false"
+        autocapitalize="off"
+        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+        aria-required="true"
+        {% if form.errors contains 'email' %}
+          aria-invalid="true"
+          aria-describedby="ContactForm-email-error"
+        {% endif %}
+        placeholder="{{ 'templates.contact.form.email' | t }}"
+      >
+      <label class="field__label extra" for="ContactForm-email">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+      {%- if form.errors contains 'email' -%}
+        <small class="contact__field-error" id="ContactForm-email-error">
+          <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+          <span class="form__message">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+        </small>
+      {%- endif -%}
+    </div>
+    <div class="field">
+      <img src="{{ 'telefono.svg' | asset_url }}" alt="mail" >
+      <input type="tel" id="ContactForm-phone" class="field__input" autocomplete="tel" name="contact[{{ 'templates.contact.form.phone' | t }}]" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" placeholder="{{ 'templates.contact.form.phone' | t }}">
+      <label class="field__label extra" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+    </div>
+    <div class="field">
+      <textarea
+        rows="10"
+        id="ContactForm-body"
+        class="text-area field__input"
+        name="contact[{{ 'templates.contact.form.comment' | t }}]"
+        placeholder="{{ 'templates.contact.form.comment' | t }}"
+      >
+        {{- form.body -}}
+      </textarea>
+      <label class="form__label field__label" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+    </div>
+    <div class="contact__button">
+      <button type="submit" class="button">
+        {{ 'templates.contact.form.send' | t }}
+      </button>
+    </div>
+  {%- endform -%}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact form",
+      "label": "Heading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name"
+    }
+  ]
+}
+{% endschema %}

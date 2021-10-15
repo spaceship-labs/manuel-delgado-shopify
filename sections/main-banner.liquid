@@ -1,0 +1,170 @@
+<script>
+  window.addEventListener('load', () => {
+    var mainBanner = new Swiper('.mainBannerSlider',{
+      slidesPerView:1,
+       // loop: true,
+       centeredSlides: true,
+       spaceBetween: 0,
+       autoplay: {
+          delay: 9000,
+          disableOnInteraction: false,
+       },
+       pagination: {
+          el: ".swiper-pagination",
+          dynamicBullets: true,
+        },
+    });
+  });
+</script>
+
+<style>
+  .mainBanner .swiper-slide{
+    position: relative;
+    height: auto;
+  }
+  .mainBanner .swiper-slide img{
+    /*position: absolute;*/
+    max-height: 600px;
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+  }
+  .mainBanner .swiper-slide a{
+    position: absolute;
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+  }
+
+
+  .ribbon{
+    background-image: linear-gradient(45deg, #e08f59, #F89157, #e16d6d);
+    min-height: 88px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+      justify-content: center;
+    padding: 0;
+    text-transform: uppercase;
+    list-style-type: none;
+    color: white;
+    font-weight: bold;
+    font-size: 13.5px;
+    flex-wrap: nowrap;
+  }
+  .ribbon li{
+    padding: 13px 32px;
+    position: relative;
+    text-align: center;
+    /*line-height: 68px;*/
+  }
+  .ribbon li i{
+    font-size: 37px;
+    position: relative;
+    top: 4px;
+    /*left: -9px;*/
+    margin: 0 5px;
+    display: block;
+    float: left;
+  }
+  .ribbon li:first-child i{
+    font-size: 65px;
+    line-height: 37px;
+    top: 0;
+  }
+  
+  @media only screen and (max-width: 990px){
+    .mainBanner{
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  @media only screen and (max-width: 600px){
+    .ribbon{
+      flex-wrap: wrap;
+    }
+    .ribbon > *{
+      width: 50%;
+    }
+  }
+</style>
+
+
+
+<div class="mainBanner page-width layout-row orderC">
+  <div class="swiper-container swiper-slider mainBannerSlider">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+         <div class="swiper-slide layout-row orderC">
+              <img
+               srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                 {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                 {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+                 {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                 {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+                 {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+                 {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+                 {%- if block.settings.image.width >= 3840 -%}{{ block.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+                 {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+               src="{{ block.settings.image | img_url: '1500x' }}"
+               loading="lazy"
+               alt="{{ block.settings.image.alt | escape }}"
+               width="{{ block.settings.image.width }}"
+               height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}">
+
+            <a href="{{ block.settings.link }}"><p></p></a>
+         </div>
+      {%- endfor -%}
+    </div>
+    <div class="swiper-pagination"></div>
+
+  </div>
+  <ul class='ribbon layout-row orderC'>
+    <li class="layout-row orderC"><i class='icon-envios-01'></i>Envíos Gratis</li>
+    <li class="layout-row orderC"><i class='icon-devolu-01'></i>Devolución sin costo</li>
+    <li class="layout-row orderC"><i class='icon-tarjeta-01'></i>Meses sin intereses</li>
+    <li class="layout-row orderC"><i class='icon-garantia-01'></i>Garantía de un año</li>
+  </ul>
+</div>
+
+{% schema %}
+{
+   "name":"Main Banner",
+   "tag":"section",
+   "settings":[
+      {
+         "type":"image_picker",
+         "id":"image",
+         "label":"t:sections.image-banner.settings.image.label"
+      }
+   ],
+   "blocks":[
+      {
+         "type":"slide",
+         "name":"slide",
+         "settings":[
+            {
+               "type":"image_picker",
+               "id":"image",
+               "label":"t:sections.image-banner.settings.image.label"
+            },
+            {
+               "type":"url",
+               "id":"link",
+               "label":"link"
+            }
+         ]
+      }
+   ],
+   "presets":[
+      {
+         "name":"Main Banner",
+         "blocks":[
+            {
+               "type":"slide"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}
